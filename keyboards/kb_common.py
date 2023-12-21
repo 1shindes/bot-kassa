@@ -9,6 +9,12 @@ common_keyboard = ReplyKeyboardMarkup(keyboard=[
     ],
     [
         KeyboardButton(
+            text='Расчетный остаток',
+            description='Запросить расчетный остаток'
+        )
+    ],
+    [
+        KeyboardButton(
             text='Фактический остаток',
             description='Задать фактический остаток'
         )

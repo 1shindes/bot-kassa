@@ -13,6 +13,10 @@ async def set_commands(bot: Bot):
             description='Добавить транзакцию'
         ),
         BotCommand(
+            command='get_balance',
+            description='Расчетный остаток'
+        ),
+        BotCommand(
             command='add_actual_balance',
             description='Задать фактический остаток'
         ),

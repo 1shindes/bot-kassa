@@ -7,6 +7,8 @@ from aiogram.types import Message
 
 from keyboards import kb_common
 
+from utils.google_sheets import gs_get_balance
+
 
 router = Router()
 
@@ -18,7 +20,7 @@ async def cmd_start(message: Message):
 
 @router.message(Command('cancel'), ~StateFilter(None))
 @router.message(F.text == 'Отменить', ~StateFilter(None))
-async def cancel_transaction(message: Message, state: FSMContext):
+async def cmd_cancel_transaction(message: Message, state: FSMContext):
     cancel_message = await cancel_trigger(state)
     await message.answer(cancel_message, reply_markup=kb_common.common_keyboard)
 
@@ -38,3 +40,10 @@ async def cancel_trigger(state: FSMContext):
     await state.clear()
 
     return cancel_message
+
+
+@router.message(Command('get_balance'))
+@router.message(F.text == 'Расчетный остаток')
+async def cmd_get_balance(message: Message):
+    balance = gs_get_balance()
+    await message.answer(f'Расчетный остаток: {balance}', reply_markup=kb_common.common_keyboard)
